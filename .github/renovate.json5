@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": [
+    "github>zaggash/gh-workflows//renovate-config/default"
+  ],
+
+  "customManagers": [
+    {
+      "description": "TwitchDropsMiner-updated version custom Regex",
+      "customType": "regex",
+      "fileMatch": ["Dockerfile"],
+      "matchStrings": [
+        "renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) versioning=(?<versioning>.*?)\\sENV TDM_VERSION_TAG=(?<currentValue>.*)"
+      ]
+    },
+  ],
+
+}
