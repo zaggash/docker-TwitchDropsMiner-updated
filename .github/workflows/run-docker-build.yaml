@@ -1,0 +1,54 @@
+name: Build image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "**"
+      - "!.github/**"
+      - ".github/workflows/run-docker-build.yaml"
+
+env:
+  ORG_ACCOUNT: "zaggash"
+  IMAGE_NAME: "twitchdropsminer-updated"
+  CONTEXT: "./"
+  DOCKERFILE: "./Dockerfile"
+
+jobs:
+  extract-tag:
+    name: Extract Application Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871
+
+      - name: Get application version
+        run: |
+         TAG=$(grep -Po 'TDM_VERSION_TAG=\K.*' ${{ env.DOCKERFILE }} )
+         echo "TAG_ENV=$TAG" >> $GITHUB_ENV
+    outputs:
+      org-account: ${{ env.ORG_ACCOUNT }}
+      image-name: ${{ env.IMAGE_NAME }}
+      tag: ${{ env.TAG_ENV }}
+      context: ${{ env.CONTEXT }}
+      dockerfile: ${{ env.DOCKERFILE}}
+
+
+  build-push:
+    name: Build & Push
+    needs: extract-tag
+    uses: zaggash/gh-workflows/.github/workflows/action_docker-build-repo.yaml@main
+    with:
+      github-account: ${{ needs.extract-tag.outputs.org-account }}
+      dockerhub-account: ${{ needs.extract-tag.outputs.org-account }}
+      image-name: ${{ needs.extract-tag.outputs.image-name }}
+      tag: ${{ needs.extract-tag.outputs.tag }}
+      context: ${{ needs.extract-tag.outputs.context }}
+      dockerfile: ${{ needs.extract-tag.outputs.dockerfile }}
+    secrets:
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
+      gh_username: ${{ secrets.GH_USERNAME }}
+      gh_token: ${{ secrets.PACKAGES_TOKEN }}
