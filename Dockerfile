@@ -1,5 +1,5 @@
 # Pull base image.
-FROM jlesage/baseimage-gui:ubuntu-22.04-v4@sha256:0eb464f0c17280e8a362cdbfe2221582ecb3cfc4907de4670b8fe0d3929c7761
+FROM jlesage/baseimage-gui:ubuntu-22.04-v4@sha256:4b38139dd5b642d5db1e5ecd89dc00c9cdc76b0aa359c04c8684ef19bbf1c5b4
 
 # Environment
 ENV LANG=en_US.UTF-8
