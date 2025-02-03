@@ -21,6 +21,12 @@ RUN \
     gir1.2-appindicator3-0.1 \
     language-pack-en \
     fonts-noto-color-emoji && \
+
+  echo "*** Fixing jlesage/baseimage-gui issue with imagemagick ***" && \
+  echo "*** Should be fixed in >4.7.0 ***" && \
+  wget https://raw.githubusercontent.com/jlesage/docker-baseimage-gui/refs/heads/master/helpers/install_app_icon.sh \
+    -O /opt/base/bin/install_app_icon.sh && \
+
   echo "*** Install Application ***" && \
   set-cont-env APP_NAME "Twitch Drops Miner" && \
   set-cont-env APP_VERSION "${TDM_VERSION_TAG}" && \
