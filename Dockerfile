@@ -6,7 +6,7 @@ ENV LANG=en_US.UTF-8
 ENV DARK_MODE=1
 ENV KEEP_APP_RUNNING=1
 # renovate: datasource=github-tags depName=Windows200000/TwitchDropsMiner-updated versioning=loose
-ENV TDM_VERSION_TAG=15.11.0
+ENV TDM_VERSION_TAG=15.12.0
 ENV APP_ICON_URL="https://raw.githubusercontent.com/Windows200000/TwitchDropsMiner-updated/master/appimage/pickaxe.png"
 
 # Install Twitch Drops Miner
