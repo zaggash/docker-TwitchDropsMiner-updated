@@ -5,6 +5,12 @@
     "github>zaggash/gh-workflows//renovate-config/default"
   ],
 
+  'docker-compose': {
+    fileMatch: [
+      'readme.md',
+    ],
+  },
+
   "customManagers": [
     {
       "description": "TwitchDropsMiner-updated version custom Regex",
