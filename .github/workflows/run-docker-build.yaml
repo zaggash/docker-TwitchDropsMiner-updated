@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@c2d88d3ecc89a9ef08eebf45d9637801dcee7eb5
+        uses: actions/checkout@033fa0dc0b82693d8986f1016a0ec2c5e7d9cbb1
 
       - name: Get application version
         run: |
